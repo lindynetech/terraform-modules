@@ -98,7 +98,6 @@ resource "aws_security_group_rule" "web_sg_ingress" {
 resource "aws_alb" "tf-alb" {
   name    = "${var.cluster_name}-tf-alb"
   subnets = data.aws_subnet_ids.default.ids
-  # type            = "application"
   security_groups = [aws_security_group.tf-alb-sg.id]
 }
 
@@ -155,7 +154,7 @@ resource "aws_alb_target_group" "tf-alb-tg" {
     path                = "/"
     protocol            = "HTTP"
     matcher             = "200"
-    interval            = 15
+    interval            = 30
     timeout             = 3
     healthy_threshold   = 2
     unhealthy_threshold = 2
